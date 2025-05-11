@@ -1,5 +1,4 @@
 
----
 
 # SharePoint Selected Scopes Permissions Manager
 
