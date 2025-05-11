@@ -12,6 +12,8 @@ This script makes it easier to manage service principal permissions for SharePoi
 * **View existing permissions** for SharePoint sites
 * **Remove permissions** from SharePoint sites
 
+![Image](https://github.com/user-attachments/assets/5fa1530f-e80c-4af8-8c63-47f5de0135bb)
+
 By using the *Selected* permission model, you enforce the principle of least privilege, only granting access to specific SharePoint resources, rather than broad tenant-wide permissions.
 
 ## Key Features
