@@ -66,6 +66,8 @@ The script provides an **interactive menu** for all key operations:
    * Choose a Graph API permission (e.g., Sites.Selected, Lists.Selected, etc.)
    * Pick a SharePoint role (read, write, manage, full control)
 
+
+
 2. **View Permissions**: View all permissions associated with a SharePoint site.
 
    * Enter the SharePoint site URL
@@ -111,9 +113,11 @@ Collectively, these are all represented as service principals in the Microsoft G
 
 ## Screenshots
 
-![Main Menu](https://example.com/screenshots/main-menu.png)
-![Grant Permission](https://example.com/screenshots/grant-permission.png)
-![View Permissions](https://example.com/screenshots/view-permissions.png)
+Grant Graph Permissions ![Image](https://github.com/user-attachments/assets/488c6a60-8450-4555-bd2c-94f79ba0a998)
+Grant SharePoint Permission ![Image](https://github.com/user-attachments/assets/b01a3846-8fd0-4c37-bce5-429fc036b913)
+Successful Update ![Image](https://github.com/user-attachments/assets/07b90e3b-843c-44c1-8040-808061abf9be)
+View Permissions ![Image](https://github.com/user-attachments/assets/9e466a59-ccdf-4350-bc08-e9f61ed6da0d)
+Remove Permissions ![Image](https://github.com/user-attachments/assets/c7632945-5778-4be5-a454-66aa82d15f38)
 
 ## Contributing
 
@@ -123,6 +127,9 @@ If you have suggestions or improvements, feel free to submit a pull request.
 
 * [SharePoint Selected Permission Scopes](https://learn.microsoft.com/en-us/graph/permissions-selected-overview?tabs=http)
 * [Microsoft Graph PowerShell SDK](https://github.com/microsoftgraph/msgraph-sdk-powershell)
+* [graphpermissions.merill.net - Sites.Selected](https://graphpermissions.merill.net/permission/Sites.Selected?tabs=apiv1%2CdocumentSetVersion1)
+* [practical365.com - Restrict App Access to SharePoint Online Sites](https://practical365.com/restrict-app-access-to-sharepoint-sites)
+* [www.michev.info - Granular permissions for working with files, list items and lists added to the Graph API!](https://www.michev.info/blog/post/6074/granular-permissions-for-working-with-files-list-items-and-lists-added-to-the-graph-api)
 
 ## License
 
