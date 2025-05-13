@@ -1,6 +1,6 @@
 
 
-# SharePoint Selected Scopes Permissions Manager
+# SharePoint Graph Permissions Helper
 
 A PowerShell script that simplifies managing SharePoint Online permissions using Microsoft Graph API's *Selected Scopes* model.
 
@@ -47,15 +47,13 @@ By using the *Selected* permission model, you enforce the principle of least pri
 
 ## Installation
 
-1. Clone or download this repository.
-
-2. Install the required Microsoft Graph PowerShell modules:
+1. Install the required Microsoft Graph PowerShell modules:
 
    ```powershell
    Install-Module Microsoft.Graph
    ```
 
-3. Run the script in PowerShell:
+2. Run the script in PowerShell:
 
    ```powershell
    .\Manage-SPOSelectedPermissions.ps1
@@ -70,11 +68,9 @@ The script provides an **interactive menu** for all key operations:
 1. **Grant Permission**: Grant access to a SharePoint site for a service principal.
 
    * Enter the SharePoint site URL
-   * Select the service principal
-   * Choose a Graph API permission (e.g., Sites.Selected, Lists.Selected, etc.)
+   * Enter the service principal Display Name
+   * Choose a Graph API permission (e.g., Sites.Selected, Lists.SelectedOperations.Selected, etc.)
    * Pick a SharePoint role (read, write, manage, full control)
-
-
 
 2. **View Permissions**: View all permissions associated with a SharePoint site.
 
@@ -121,11 +117,11 @@ Collectively, these are all represented as service principals in the Microsoft G
 
 ## Screenshots
 
-Grant Graph Permissions ![Image](https://github.com/user-attachments/assets/488c6a60-8450-4555-bd2c-94f79ba0a998)
-Grant SharePoint Permission ![Image](https://github.com/user-attachments/assets/b01a3846-8fd0-4c37-bce5-429fc036b913)
-Successful Update ![Image](https://github.com/user-attachments/assets/07b90e3b-843c-44c1-8040-808061abf9be)
-View Permissions ![Image](https://github.com/user-attachments/assets/9e466a59-ccdf-4350-bc08-e9f61ed6da0d)
-Remove Permissions ![Image](https://github.com/user-attachments/assets/c7632945-5778-4be5-a454-66aa82d15f38)
+**Grant Graph Permissions** ![Image](https://github.com/user-attachments/assets/488c6a60-8450-4555-bd2c-94f79ba0a998)
+**Grant SharePoint Permission** ![Image](https://github.com/user-attachments/assets/b01a3846-8fd0-4c37-bce5-429fc036b913)
+**Successful Update** ![Image](https://github.com/user-attachments/assets/07b90e3b-843c-44c1-8040-808061abf9be)
+**View Permissions** ![Image](https://github.com/user-attachments/assets/9e466a59-ccdf-4350-bc08-e9f61ed6da0d)
+**Remove Permissions** ![Image](https://github.com/user-attachments/assets/c7632945-5778-4be5-a454-66aa82d15f38)
 
 ## Contributing
 
