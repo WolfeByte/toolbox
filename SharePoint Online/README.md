@@ -5,12 +5,21 @@
 A PowerShell script that simplifies managing SharePoint Online permissions using Microsoft Graph API's *Selected Scopes* model.
 
 ## Overview
+If you’ve ever had to grant **application level-access** to SharePoint Online for automation tasks, you’ve likely run into a common limitation: the only option being to assign tenant wide Graph permissions. Need your app to manage a single document library? Too bad, it gets access to *all* of them. For example, assigning *Sites.ReadWrite.All* lets the app create or delete folders where needed... but also everywhere else, whether you like it or not. That’s not ideal if the identity is ever compromised.
 
-This script makes it easier to manage service principal permissions for SharePoint Online sites via Microsoft Graph API’s *Selected Scopes* model. It provides administrators with the ability to:
+Enter **Selected Scopes**.
 
-* **Grant granular, resource-specific permissions** to service principals
-* **View existing permissions** for SharePoint sites
-* **Remove permissions** from SharePoint sites
+Microsoft Graph’s *Selected Scopes* model for SharePoint Online lets you grant precise, resource specific access, down to individual sites, lists, or even items. It’s a much better way to enforce **least-privilege** access for service principals and managed identities. Microsoft has recently added support for even more granular permissions, which is great, but setting it all up via Graph is not exactly straightforward. Documentation is light on practical examples, and the process involves several layers of Graph calls.
+
+This script aims to fix that. It gives you an interactive PowerShell interface to grant, view, and remove fine-grained SharePoint permissions using the Graph API. No manual JSON crafting, AppID or SiteID hunting, or API spelunking required.
+
+If the term *application* feels ambiguous, you’re not alone. In the Microsoft ecosystem, it could mean a **Service Principal**, a **Managed Identity**, or an **Enterprise Application** all of which fall under the umbrella of *Workload Identities* (yes, it’s confusing). But if you’re here because, say, a Logic App needs access to just one SharePoint folder, and you've been banging your head against the wall for hours trying to set it up and get it to work, then you’re in the right place.
+
+With this script you can:
+
+* **Grant granular, resource-specific permissions** to a service principal (an Application) for a SharePoint site/list/item
+* **View existing permissions** for any service principal for a SharePoint site/list/item
+* **Remove permissions** for a service principal from a SharePoint site/list/item
 
 ![Image](https://github.com/user-attachments/assets/5fa1530f-e80c-4af8-8c63-47f5de0135bb)
 
@@ -22,7 +31,6 @@ By using the *Selected* permission model, you enforce the principle of least pri
 * **View Permissions**: Quickly check which service principals have access to a SharePoint site and what permissions they have.
 * **Remove Permissions**: Easily revoke access from any service principal.
 * **Interactive Menus**: User-friendly selection menus for all major operations.
-* **Color-Coded Output**: Easy-to-read and follow console instructions and output.
 
 ## Prerequisites
 
