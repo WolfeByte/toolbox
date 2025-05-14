@@ -56,7 +56,7 @@ By using the *Selected* permission model, you enforce the principle of least pri
 2. Run the script in PowerShell:
 
    ```powershell
-   .\Manage-SPOSelectedPermissions.ps1
+   .\SharePointGraphHelper.ps1
    ```
 
 ## Usage
