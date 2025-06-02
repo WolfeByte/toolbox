@@ -2,13 +2,22 @@
 
 ## Purpose
 
-This PowerShell script enables quick testing of Microsoft Entra External ID's Self-Service Password Reset (SSPR) API without needing to build a Single Page Application first. It provides a simple command-line interface to test the complete SSPR flow with detailed request/response logging for debugging and validation.
+This PowerShell script enables quick testing of Microsoft Entra External ID's Self-Service Password Reset (SSPR) API without needing to build a Single Page Application first. It provides a simple command-line interface to test the complete SSPR flow with detailed request/response output for debugging and validation.
 
-![Image](https://github.com/user-attachments/assets/ad92b0f9-47c1-4a6b-bf5f-7053668384e0)
+![Image](https://github.com/user-attachments/assets/7ae281fc-bfde-40d8-866f-bd2dc7c2d219)
+
+### 1. Prerequisites
+
+- An External ID tenant
+- Email one-time passcode (Email OTP) authentication method enabled for all users
+- A sign-up user flow with **Email with password** as an authentication method under Identity providers.
+- A Test user created in the tenant with valid email address
+- PowerShell 7.1 or later
+
 
 ## Quick Setup
 
-### 1. Create App Registration
+### 2. Create App Registration
 
 1. **Sign in** to the [Microsoft Entra admin center](https://entra.microsoft.com)
 2. **Go to** Applications > App registrations > New registration
@@ -36,12 +45,6 @@ $config = @{
 }
 ```
 
-### 3. Prerequisites
-
-- External ID tenant with SSPR enabled
-- Test user with email/password authentication
-- PowerShell 5.1 or later
-
 ## Usage
 
 1. **Run the script**: `.\Test-PasswordReset.ps1`
@@ -56,7 +59,7 @@ The script tests the 4-step SSPR flow:
 
 ### Step 1: Start (`/resetpassword/v1.0/start`)
 - Initiates password reset for the user
-- Validates email address exists
+- Validates user exists in the tenant
 - Returns continuation token
 
 ### Step 2: Challenge (`/resetpassword/v1.0/challenge`)
@@ -66,7 +69,7 @@ The script tests the 4-step SSPR flow:
 
 ### Step 3: Continue (`/resetpassword/v1.0/continue`)
 - Validates the OTP code from email
-- Requires `grant_type=oob` parameter
+- Includes required `grant_type=oob` parameter
 - Returns final continuation token
 
 ### Step 4: Submit (`/resetpassword/v1.0/submit`)
@@ -93,32 +96,6 @@ The `redirect` challenge type is required by Microsoft for all native authentica
 | `invalid_oob_value` | Wrong OTP code | Check email for correct OTP |
 | `password_too_weak` | Password complexity | Use stronger password |
 
-## Sample Output
-
-```
-========================================
- External ID Password Reset Flow Test
-========================================
-
-Step 1: Starting password reset flow...
-
-===========================================
- STEP 1: START
-===========================================
-
-URL:
-  https://contoso.ciamlogin.com/contoso.onmicrosoft.com/resetpassword/v1.0/start
-
-Request Body:
-  client_id = ce65863c-6ed6-41c3-b16c-d9df898714f3
-  challenge_type = oob redirect
-  username = user@example.com
-
-Response:
-  continuation_token = AQABIgEAAABVrSpeuWamRam2jAF1XRQEp1cE...
-
-SUCCESS: Password reset flow started!
-```
 
 ## API Endpoints Reference
 
@@ -131,6 +108,7 @@ SUCCESS: Password reset flow started!
 
 ## Resources
 
+- [Enable self-service password reset](https://learn.microsoft.com/en-us/entra/external-id/customers/how-to-enable-password-reset-customers)
 - [Native Authentication API Reference](https://learn.microsoft.com/en-us/entra/identity-platform/reference-native-authentication-api)
 - [Challenge Types Documentation](https://learn.microsoft.com/en-us/entra/identity-platform/concept-native-authentication-challenge-types)
 - [React SSPR Tutorial](https://learn.microsoft.com/en-us/entra/identity-platform/tutorial-native-authentication-single-page-app-react-reset-password)
