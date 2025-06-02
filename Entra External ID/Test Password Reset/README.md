@@ -4,6 +4,8 @@
 
 This PowerShell script enables quick testing of Microsoft Entra External ID's Self-Service Password Reset (SSPR) API without needing to build a Single Page Application first. It provides a simple command-line interface to test the complete SSPR flow with detailed request/response logging for debugging and validation.
 
+![Image](https://github.com/user-attachments/assets/ad92b0f9-47c1-4a6b-bf5f-7053668384e0)
+
 ## Quick Setup
 
 ### 1. Create App Registration
