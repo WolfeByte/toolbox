@@ -40,10 +40,17 @@ By using the *Selected* permission model, you enforce the principle of least pri
   * `Microsoft.Graph.Authentication`
   * `Microsoft.Graph.Sites`
   * `Microsoft.Graph.Applications`
-* **Appropriate Permissions** in Microsoft Entra ID
+* **Required permissions** in Microsoft Entra ID for the account running the script:
+  - `Directory.ReadWrite.All`
+  - `Sites.FullControl.All`
 
-  * `Directory.ReadWrite.All`
-  * `Sites.FullControl.All`
+The script will attempt to assign these permissions when you connect, as they are specified in the -Scope parameter. However, if you do not have sufficient privileges to grant consent for these permissions, you will need to request someone with the necessary elevated access to do so on your behalf.
+
+To test assigning these permissions, you can connect to Microsoft Graph using the following command, specifying the required scopes in the -Scopes parameter:
+
+```powershell
+Connect-MgGraph -TenantId 'contoso.com' -Scopes 'Directory.ReadWrite.All', 'Sites.FullControl.All'
+```
 
 ## Installation
 
