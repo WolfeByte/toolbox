@@ -1,10 +1,27 @@
-# External ID Password Reset Testing Script - v1.0 API
-# Correct URL format for External ID
+# External ID Password Reset Testing Script
 
-# External ID Password Reset Testing Script - Enhanced with Configuration
-# Based on Microsoft native authentication best practices
+<#
+    .SYNOPSIS
+    Tests the password reset flow for an External ID tenant using PowerShell.
 
-# Configuration object (based on mobile app JSON pattern)
+    .DESCRIPTION
+    This script automates the password reset process for an External ID tenant, including starting the flow,
+    requesting an OTP, verifying it, and setting a new password. It provides detailed output for each step,
+    including request and response details.
+
+    .PARAMETER userEmail
+    The email address of the user for whom the password reset is being requested.
+
+    .EXAMPLE
+    .\Test-PasswordReset.ps1
+
+    This will prompt for the user's email and execute the password reset flow.
+
+    .NOTES
+    Author: Benjamin Wolfe
+    Date: May 11, 2025
+#>
+# Configuration object
 $config = @{
     client_id = "ce65863c-6ed6-41c3-b16c-d9df898714f3"
     tenant_subdomain = "thewolfecustomers"
@@ -13,7 +30,7 @@ $config = @{
             authority_url = "https://thewolfecustomers.ciamlogin.com/thewolfecustomers.onmicrosoft.com/"
         }
     )
-    challenge_types = @("oob", "redirect")  # Required for SSPR flow per Microsoft docs
+    challenge_types = @("oob", "redirect") 
 }
 
 # Prompt for user email
@@ -21,7 +38,7 @@ $userEmail = Read-Host "Enter the email address for password reset"
 
 # Derived URLs from configuration
 $baseUrl = $config.authorities[0].authority_url.TrimEnd('/')
-$challengeTypesString = $config.challenge_types -join " "  # Space-separated as per API docs
+$challengeTypesString = $config.challenge_types -join " " 
 
 # Helper function to display request/response details
 function Show-RequestDetails {
@@ -264,7 +281,7 @@ Write-Host "Step 1: Starting password reset flow..." -ForegroundColor Cyan
 
 $startBody = @{
     "client_id" = $config.client_id
-    "challenge_type" = $challengeTypesString  # Space-separated: "oob redirect"
+    "challenge_type" = $challengeTypesString
     "username" = $userEmail
 }
 
@@ -436,9 +453,3 @@ Write-Host ""
 # Clear the password from memory
 $newPasswordPlain = $null
 [System.GC]::Collect()
-
-# Display configuration insights
-Write-Host "Configuration Insights:" -ForegroundColor Magenta
-Write-Host "  Using space-separated challenge types: '$challengeTypesString'" -ForegroundColor Green
-Write-Host "  Authority configured correctly" -ForegroundColor Green
-Write-Host "  Native authentication API flow completed" -ForegroundColor Green
