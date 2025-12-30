@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__powershell-standards__classify_script",
+      "mcp__powershell-standards__check_compliance",
+      "mcp__powershell-standards__fix_syntax",
+      "mcp__powershell-standards__convert_spelling"
+    ]
+  }
+}
