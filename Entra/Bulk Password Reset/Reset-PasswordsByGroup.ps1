@@ -1,24 +1,22 @@
 #Requires -Version 5.1
 <#
 .SYNOPSIS
-Performs a mass password reset of users in an Entra ID group.
+Performs a mass password reset of users in a specific Entra ID group.
 
 .DESCRIPTION
-This script automates the process of resetting passwords for multiple users within an Entra ID group.
+This script automates the process of resetting passwords for multiple users contained within an Entra ID group.
 It retrieves the members of the specified group, generates a temporary password for each user based on
 their first and last initials combined with a predefined suffix, resets their password in Entra, and
-requires them to change their password at their next login.
+requires them to change their password at their next login. This can simplify password management tasks for 
+distributing temporary passwords to new users.
 
 The script outputs both a log file (.log) and a CSV report (.csv) in the same location.
-
-.PARAMETER TenantId
-The Entra Tenant ID where the changes will be made.
 
 .PARAMETER GroupId
 The Object ID of the Entra group containing the users.
 
 .PARAMETER PasswordSuffix
-The suffix for the temporary password. Default is ".Mecca25".
+The suffix for the temporary password. Default is ".Contoso25".
 
 .PARAMETER LogPath
 Optional. Base path for log files (without extension).
@@ -27,37 +25,32 @@ Both .log and .csv files will be created with this base name.
 
 .NOTES
 Prerequisites:
-* PowerShell 5.1 or higher
-* Microsoft.Graph PowerShell module (minimum version 2.5.0)
+* PowerShell 7.1 or higher
+* Microsoft.Graph.Users PowerShell module
 * Required Graph API permissions:
-  - User.Read.All
   - GroupMember.Read.All
-  - User.ReadWrite.All
+  - User-PasswordProfile.ReadWrite.All
 
     Author: Benjamin Wolfe
-    Date: December 31, 2025
+    Date: February 11, 2025
 .EXAMPLE
-.\Reset-Passwords.ps1 -TenantId "12345678-1234-1234-1234-123456789012" -GroupId "87654321-4321-4321-4321-210987654321"
+.\Reset-PasswordsByGroup.ps1 -GroupId "87654321-4321-4321-4321-210987654321"
 Runs the script with default logging to .\logs\PasswordReset_[timestamp].[log/csv]
 
 .EXAMPLE
-.\Reset-Passwords.ps1 -TenantId "12345678-1234-1234-1234-123456789012" -GroupId "87654321-4321-4321-4321-210987654321" -LogPath "D:\MyLogs\Reset"
-Runs the script with logging to D:\MyLogs\Reset.log and D:\MyLogs\Reset.csv
+.\Reset-PasswordsByGroup.ps1 -GroupId "87654321-4321-4321-4321-210987654321" -LogPath "C:\MyLogs\Reset"
+Runs the script with logging to C:\MyLogs\Reset.log and C:\MyLogs\Reset.csv
 #>
 
 [CmdletBinding(SupportsShouldProcess = $true)]
 param (
     [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
-    [string]$TenantId,
-
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
     [string]$GroupId,
 
     [Parameter(Mandatory = $false)]
     [ValidateNotNullOrEmpty()]
-    [string]$PasswordSuffix = ".Mecca25",
+    [string]$PasswordSuffix = ".Welcome25",
 
     [Parameter(Mandatory = $false)]
     [string]$LogPath
@@ -146,10 +139,10 @@ Write-Log "Script started - Using log path: $LogPath"
 if (-not (Get-Module -ListAvailable Microsoft.Graph)) {
     Write-Host "Installing Microsoft.Graph module..."
 #endregion Helper Functions
-    Install-Module Microsoft.Graph -Scope CurrentUser -Force
+    Install-Module Microsoft.Graph.Users -Scope CurrentUser -Force
 }
 
-# Initialize CSV report array
+# Initialise CSV report array
 #region Main Execution
 $reportData = @()
 
@@ -157,10 +150,7 @@ $reportData = @()
 try {
     $context = Get-MgContext
     if (-not $context) {
-        Connect-MgGraph -Scopes User.Read.All, GroupMember.Read.All, User.ReadWrite.All -TenantId $TenantId
-    } elseif ($context.TenantId -ne $TenantId) {
-        Disconnect-MgGraph
-        Connect-MgGraph -Scopes User.Read.All, GroupMember.Read.All, User.ReadWrite.All -TenantId $TenantId
+        Connect-MgGraph -Scopes User-PasswordProfile.ReadWrite.All, GroupMember.Read.All -NoWelcome
     }
     Write-Log "Successfully authenticated to Microsoft Graph"
 } catch {
