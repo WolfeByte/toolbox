@@ -1,6 +1,6 @@
 # Reset-PasswordsByGroup.ps1
 
-![PowerShell](https://img.shields.io/badge/PowerShell-5.1+-blue) ![Microsoft Graph](https://img.shields.io/badge/Microsoft%20Graph-SDK-00BCF2) ![Entra](https://img.shields.io/badge/Microsoft-Entra_ID-0078D4)
+![PowerShell](https://img.shields.io/badge/PowerShell-7.1+-blue) ![Microsoft Graph](https://img.shields.io/badge/Microsoft%20Graph-SDK-00BCF2) ![Entra](https://img.shields.io/badge/Microsoft-Entra_ID-0078D4)
 
 Perform a bulk password reset for users in a specifci Entra ID group.
 
