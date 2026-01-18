@@ -6,7 +6,7 @@ A PowerShell script for testing connecting to Entra using Client Credentials
 
 ## Overview
 
-This script connects to Entra using client credentials from an app registration with a client secret, then validates that the assigned scopes and application permissions are working as expected.
+This script lets you test connecting to Entra using client credentials (an app registration with a client secret) to validate that the assigned scopes and application permissions are all working as expected.
 
 ## Prerequisites
 
