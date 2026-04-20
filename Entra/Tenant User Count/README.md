@@ -8,7 +8,7 @@ Export a breakdown of user account types across Entra ID and Exchange Online, wi
 
 When sizing an IGA product, vendors typically licence based on human identities — but Entra ID surfaces Exchange resource accounts (shared mailboxes, rooms, equipment) as regular user objects, making it hard to determine your true user count without digging into Exchange.
 
-This script pulls all Entra user objects and all Exchange Online mailboxes, correlates them, and produces a summary that separates human accounts from Exchange resource accounts. The final output is a licensable human account count that you can hand directly to a vendor.
+This script pulls all Entra user objects and all Exchange Online mailboxes, correlates them, and produces a summary that separates human accounts from Exchange resource accounts. The final output is a licensable human account number that you can hand directly to a vendor.
 
 With this script you can:
 * **Count all Entra user objects** broken down by Member, Guest, and account enabled state
