@@ -17,6 +17,9 @@ With this script you can:
 * **Exclude Exchange system mailboxes** (e.g. DiscoverySearchMailbox) that have no Entra identity at all
 * **Export results** to a formatted HTML report and CSV files for sharing with vendors or stakeholders
 
+<img width="877" height="963" alt="image" src="https://github.com/user-attachments/assets/2f11e1e5-4a90-4032-904e-eb8f529e7940" />
+
+
 ## Prerequisites
 
 * **PowerShell**: 7.1 or higher
